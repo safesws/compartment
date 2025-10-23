@@ -1,0 +1,719 @@
+0:000> dt ndis!_NDIS_NSI_COMPARTMENT_TYPE
+   NDIS_NSI_COMPARTMENT_TYPE_UNSPECIFIED = 0n0
+   NDIS_NSI_COMPARTMENT_TYPE_NATIVE = 0n1
+   NDIS_NSI_COMPARTMENT_TYPE_ROUTING_DOMAIN = 0n2
+   NDIS_NSI_COMPARTMENT_TYPE_CONTAINER = 0n3
+   
+   
+0:000> dt ndis!_NDIS_IF_COMPARTMENT_BLOCK
+   +0x000 Link             : _LIST_ENTRY
+   +0x010 CompartmentId    : Uint4B
+   +0x018 NetworkLink      : _LIST_ENTRY
+   +0x028 Flags            : Uint4B
+   +0x02c Ref              : Int4B
+   +0x030 UserRef          : Int4B
+   +0x038 LoopbackNetwork  : Ptr64 _NDIS_IF_NETWORK_BLOCK
+   +0x040 LoopbackInfo     : _NDIS_NSI_COMPARTMENT_RW
+   +0x6a8 LoopbackIf       : Ptr64 _NDIS_IF_BLOCK
+   +0x6b0 AsyncEvent       : Ptr64 _KEVENT
+   +0x6b8 JobCount         : Uint4B
+   +0x6c0 JobLink          : _LIST_ENTRY
+   
+   
+0:000> dt ndis!_NDIS_NSI_COMPARTMENT_RW
+   +0x000 Header           : _NDIS_OBJECT_HEADER
+   +0x008 LoopbackIfLuid   : _NET_LUID_LH
+   +0x010 LoopbackIfNetworkGuid : _GUID
+   +0x020 LoopbackIfInterfaceGuid : _GUID
+   +0x030 LoopbackIfDescr  : _IF_COUNTED_STRING_LH
+   +0x234 LoopbackIfAlias  : _IF_COUNTED_STRING_LH
+   +0x438 CompartmentGuid  : _GUID
+   +0x448 CompartmentDescr : _IF_COUNTED_STRING_LH
+   +0x64c CompartmentType  : _NDIS_NSI_COMPARTMENT_TYPE
+   +0x650 Flags            : Uint4B
+   +0x654 NamespaceGuid    : _GUID
+   
+   
+dt ndis!_NDIS_IF_NETWORK_BLOCK
+   +0x000 Link             : _LIST_ENTRY
+   +0x010 CompartmentLink  : _LIST_ENTRY
+   +0x020 NetworkGuid      : _GUID
+   +0x030 Compartment      : Ptr64 _NDIS_IF_COMPARTMENT_BLOCK
+   +0x038 InterfaceLink    : _LIST_ENTRY
+   +0x048 Flags            : Uint4B
+   +0x04c Ref              : Int4B
+   +0x050 NetworkInfo      : _NDIS_NSI_NETWORK_RW
+   +0x260 AsyncEvent       : Ptr64 _KEVENT
+   
+0:000> dt ndis!_NDIS_NSI_NETWORK_RW
+   +0x000 Header           : _NDIS_OBJECT_HEADER
+   +0x004 CompartmentId    : Uint4B
+   +0x008 SiteId           : Uint4B
+   +0x00c NetworkName      : _IF_COUNTED_STRING_LH 
+   
+0:000> dt ndis!_NET_IF_INFORMATION
+   +0x000 Header           : _NDIS_OBJECT_HEADER
+   +0x004 Flags            : Uint4B
+   +0x008 PhysicalLocation : _NET_PHYSICAL_LOCATION_LH
+   +0x014 WanTunnelType    : Uint4B
+   +0x018 PortNumber       : Uint4B
+   +0x01c AccessType       : _NET_IF_ACCESS_TYPE
+   +0x020 DirectionType    : _NET_IF_DIRECTION_TYPE
+   +0x024 ConnectionType   : _NET_IF_CONNECTION_TYPE
+   +0x028 ifConnectorPresent : UChar
+   +0x02a PhysAddressLength : Uint2B
+   +0x02c PhysAddressOffset : Uint2B
+   +0x02e PermanentPhysAddressOffset : Uint2B
+   +0x030 FriendlyNameLength : Uint2B
+   +0x032 FriendlyNameOffset : Uint2B
+   +0x034 InterfaceGuid    : _GUID
+   +0x044 NetworkGuid      : _GUID
+   +0x054 SupportedStatistics : Uint4B
+   +0x058 MediaType        : _NDIS_MEDIUM
+   +0x05c PhysicalMediumType : _NDIS_PHYSICAL_MEDIUM
+   
+0:000> dt ndis!_NDIS_IF_BLOCK
+   +0x000 Type             : UChar
+   +0x001 Revision         : UChar
+   +0x002 Size             : Uint2B
+   +0x004 ifIndex          : Uint4B
+   +0x008 ifDescr          : _IF_COUNTED_STRING_LH
+   +0x20c ifType           : Uint2B
+   +0x210 AccessType       : _NET_IF_ACCESS_TYPE
+   +0x214 DirectionType    : _NET_IF_DIRECTION_TYPE
+   +0x218 ConnectionType   : _NET_IF_CONNECTION_TYPE
+   +0x21c InterfaceGuid    : _GUID
+   +0x22c ifConnectorPresent : UChar
+   +0x230 ifFlags          : Uint4B
+   +0x234 MediaType        : _NDIS_MEDIUM
+   +0x238 PhysicalMediumType : _NDIS_PHYSICAL_MEDIUM
+   +0x240 CompartmentId    : Uint4B
+   +0x244 NetworkGuid      : _GUID
+   +0x254 ifAlias          : _IF_COUNTED_STRING_LH
+   +0x458 ifOperStatus     : _NET_IF_OPER_STATUS
+   +0x45c ifOperStatusFlags : Uint4B
+   +0x460 ifMtu            : Uint4B
+   +0x464 ifPhysAddress    : _IF_PHYSICAL_ADDRESS_LH
+   +0x486 PermanentPhysAddress : _IF_PHYSICAL_ADDRESS_LH
+   +0x4a8 ifAdminStatus    : _NET_IF_ADMIN_STATUS
+   +0x4b0 XmitLinkSpeed    : Uint8B
+   +0x4b8 RcvLinkSpeed     : Uint8B
+   +0x4c0 ifPromiscuousMode : UChar
+   +0x4c1 ifDeviceWakeUpEnable : UChar
+   +0x4c2 ifHideInterfaceInUi : UChar
+   +0x4c4 MediaConnectState : _NET_IF_MEDIA_CONNECT_STATE
+   +0x4c8 MediaDuplexState : _NET_IF_MEDIA_DUPLEX_STATE
+   +0x4d0 Link             : _LIST_ENTRY
+   +0x4e0 ProviderLink     : _LIST_ENTRY
+   +0x4f0 NetworkLink      : _LIST_ENTRY
+   +0x500 ifRcvAddressTable : Ptr64 _NDIS_IF_RCV_ADDRESS
+   +0x508 ifRcvAddressCount : Uint4B
+   +0x50c ifMaxRcvAddressCount : Uint4B
+   +0x510 LowerLayerIfCount : Uint4B
+   +0x514 HigherLayerIfCount : Uint4B
+   +0x518 Ref              : Int4B
+   +0x520 NetLuid          : _NET_LUID_LH
+   +0x528 ProviderIfContext : Ptr64 Void
+   +0x530 ProviderHandle   : Ptr64 _NDIS_IF_PROVIDER_BLOCK
+   +0x538 Flags            : Uint4B
+   +0x53c PhysicalLocation : _NET_PHYSICAL_LOCATION_LH
+   +0x548 WanTunnelType    : Uint4B
+   +0x54c PortNumber       : Uint4B
+   +0x550 ifLastChange     : Uint8B
+   +0x558 ifCounterDiscontinuityTime : Uint8B
+   +0x560 Network          : Ptr64 _NDIS_IF_NETWORK_BLOCK
+   +0x568 Compartment      : Ptr64 _NDIS_IF_COMPARTMENT_BLOCK
+   +0x570 AsyncEvent       : Ptr64 _KEVENT
+   +0x578 AlreadyDeregistered : UChar
+   +0x579 bNdisIsProvider  : UChar
+   +0x57a IsNdisFilter     : UChar
+   +0x57b MiniportAvailable : UChar
+   +0x57c MiniportLinkReference : Uint4B
+   +0x580 Source           : NdisIfBlockSource
+   +0x588 Miniport         : Ptr64 _NDIS_MINIPORT_BLOCK
+   +0x588 Filter           : Ptr64 _NDIS_FILTER_BLOCK
+   +0x590 SupportedStatistics : Uint4B
+   +0x598 ifL2NetworkInfo  : Ptr64 _IF_COUNTED_STRING_LH
+   +0x5a0 RefCountTracker  : Ptr64 NDIS_REFCOUNT_HANDLE__
+   +0x5a8 MpRefCountTracker : Ptr64 NDIS_REFCOUNT_HANDLE__
+   +0x5b0 InterlockedFlags : Uint4B
+   +0x5b4 LastMiniportFatalErrorReason : _NDIS_MINIPORT_EVENT
+   +0x5b8 MiniportFatalErrorTimestamp : [3] Uint8B
+   +0x5d0 MiniportFatalErrorTimestampIndex : UChar
+   +0x5d1 NetworkIdOverridden : UChar
+   +0x5d2 IsWDFMiniportInterface : UChar
+   +0x5d8 PcwDataBlock     : Ptr64 _NDIS_PCW_DATA_BLOCK
+   
+   
+0:000> dt ndis!_NDIS_MINIPORT_BLOCK
+   +0x000 Header           : _NDIS_OBJECT_HEADER
+   +0x008 NextMiniport     : Ptr64 _NDIS_MINIPORT_BLOCK
+   +0x010 BaseMiniport     : Ptr64 _NDIS_MINIPORT_BLOCK
+   +0x018 MiniportAdapterContext : Ptr64 Void
+   +0x020 Reserved4        : _UNICODE_STRING
+   +0x020 MajorNdisVersion : UChar
+   +0x021 MinorNdisVersion : UChar
+   +0x028 PcwDataBlock     : Ptr64 _NDIS_PCW_DATA_BLOCK
+   +0x030 PcwDatapathEventMask : Int4B
+   +0x030 Reserved28       : Ptr64 Void
+   +0x038 OpenQueue        : Ptr64 _NDIS_OPEN_BLOCK
+   +0x040 ShortRef         : _REFERENCE
+   +0x050 PcwDatapathCycleMask : Int4B
+   +0x050 Reserved29       : Ptr64 Void
+   +0x058 LinkStateIndicationFlags : UChar
+   +0x059 LockAcquired     : UChar
+   +0x05a PmodeOpens       : UChar
+   +0x05b LoopbackOpens    : UChar
+   +0x060 Lock             : Uint8B
+   +0x068 Reserved25       : Ptr64 Void
+   +0x070 Interrupt        : Ptr64 _NDIS_MINIPORT_INTERRUPT
+   +0x078 Flags            : Uint4B
+   +0x07c PnPFlags         : Uint4B
+   +0x080 PacketList       : _LIST_ENTRY
+   +0x090 FirstPendingPacket : Ptr64 _NDIS_PACKET
+   +0x098 ReturnPacketsQueue : Ptr64 _NDIS_PACKET
+   +0x0a0 RequestBuffer    : Uint4B
+   +0x0a8 Reserved26       : Ptr64 Void
+   +0x0b0 PrimaryMiniport  : Ptr64 _NDIS_MINIPORT_BLOCK
+   +0x0b8 NextCancelSendNetBufferListsHandler : Ptr64     void 
+   +0x0c0 OidContext       : Ptr64 Void
+   +0x0c8 SupportedOidListLength : Uint4B
+   +0x0d0 Resources        : Ptr64 _CM_RESOURCE_LIST
+   +0x0d8 WakeUpDpcTimer   : _NDIS_TIMER
+   +0x158 Reserved20       : _UNICODE_STRING
+   +0x158 MiniportMediaConnectState : _NET_IF_MEDIA_CONNECT_STATE
+   +0x15c MiniportMediaDuplexState : _NET_IF_MEDIA_DUPLEX_STATE
+   +0x168 SymbolicLinkName : _UNICODE_STRING
+   +0x178 CheckForHangSeconds : Uint4B
+   +0x17c CFHangTicks      : Uint2B
+   +0x17e CFHangCurrentTick : Uint2B
+   +0x180 ResetStatus      : Int4B
+   +0x188 ResetOpen        : Ptr64 _NDIS_OPEN_BLOCK
+   +0x190 EthDB            : Ptr64 _X_FILTER
+   +0x190 NullDB           : Ptr64 _X_FILTER
+   +0x198 Unused1          : Ptr64 Void
+   +0x1a0 Unused2          : Ptr64 Void
+   +0x1a8 Unused3          : Ptr64 Void
+   +0x1b0 PacketIndicateHandler : Ptr64     void 
+   +0x1b8 SendCompleteHandler : Ptr64     void 
+   +0x1c0 SendResourcesHandler : Ptr64     void 
+   +0x1c8 ResetCompleteHandler : Ptr64     void 
+   +0x1d0 MediaType        : _NDIS_MEDIUM
+   +0x1d4 AutoNegotiationFlags : Uint4B
+   +0x1d8 Reserved5        : _NDIS_INTERFACE_TYPE
+   +0x1dc AdapterType      : _NDIS_INTERFACE_TYPE
+   +0x1e0 Reserved6        : Ptr64 _DEVICE_OBJECT
+   +0x1e0 MediaConnectState : _NET_IF_MEDIA_CONNECT_STATE
+   +0x1e8 Reserved7        : Ptr64 _DEVICE_OBJECT
+   +0x1e8 MediaDuplexState : _NET_IF_MEDIA_DUPLEX_STATE
+   +0x1f0 SupportedOidList : Ptr64 Uint4B
+   +0x1f8 MiniportSGDmaBlock : Ptr64 _NDIS_SG_DMA_BLOCK
+   +0x200 CallMgrAfList    : Ptr64 _NDIS_AF_LIST
+   +0x208 MiniportThread   : Ptr64 Void
+   +0x210 SetInfoBuf       : Ptr64 Void
+   +0x218 SetInfoBufLen    : Uint2B
+   +0x21a MaxSendPackets   : Uint2B
+   +0x21c FakeStatus       : Int4B
+   +0x220 Reserved24       : Ptr64 Void
+   +0x220 GlobalTriageBlock : Ptr64 Void
+   +0x228 CombinedNdisRSSParameters : Ptr64 _NDIS_RECEIVE_SCALE_PARAMETERS
+   +0x230 TimerQueue       : Ptr64 _NDIS_MINIPORT_TIMER
+   +0x230 TimerObjectQueue : Ptr64 _NDIS_TIMER_ENTRY
+   +0x238 MacOptions       : Uint4B
+   +0x240 PendingRequest   : Ptr64 _NDIS_REQUEST
+   +0x248 MaximumLongAddresses : Uint4B
+   +0x24c Reserved27       : Uint4B
+   +0x250 MiniportCurrentLookahead : Uint4B
+   +0x254 MiniportMaximumLookahead : Uint4B
+   +0x258 Reserved1        : Uint8B
+   +0x258 NullMediaFilter  : Ptr64 _X_FILTER
+   +0x260 DisableInterruptHandler : Ptr64     void 
+   +0x268 EnableInterruptHandler : Ptr64     void 
+   +0x270 SendPacketsHandler : Ptr64     void 
+   +0x278 DeferredSendHandler : Ptr64     unsigned char 
+   +0x280 EthRxIndicateHandler : Ptr64     void 
+   +0x288 Reserved30       : Ptr64 Void
+   +0x290 NextSendNetBufferListsHandler : Ptr64     void 
+   +0x298 EthRxCompleteHandler : Ptr64     void 
+   +0x2a0 Reserved31       : Ptr64 Void
+   +0x2a8 SavedNextSendNetBufferListsHandler : Ptr64     void 
+   +0x2b0 StatusHandler    : Ptr64     void 
+   +0x2b8 StatusCompleteHandler : Ptr64     void 
+   +0x2c0 TDCompleteHandler : Ptr64     void 
+   +0x2c8 QueryCompleteHandler : Ptr64     void 
+   +0x2d0 SetCompleteHandler : Ptr64     void 
+   +0x2d8 WanSendCompleteHandler : Ptr64     void 
+   +0x2e0 WanRcvHandler    : Ptr64     void 
+   +0x2e8 WanRcvCompleteHandler : Ptr64     void 
+   +0x2f0 SendNetBufferListsCompleteHandler : Ptr64     void 
+   +0x2f8 PnPEventLockEvent : Ptr64 _KEVENT
+   +0x300 MediaSpecificAttributes : Ptr64 _NDIS_OBJECT_HEADER
+   +0x308 PendingQueryPowerIrp : Ptr64 _IRP
+   +0x310 InterruptEx      : Ptr64 _NDIS_INTERRUPT_BLOCK
+   +0x318 XmitLinkSpeed    : Uint8B
+   +0x320 RcvLinkSpeed     : Uint8B
+   +0x328 PauseFunctions   : _NDIS_SUPPORTED_PAUSE_FUNCTIONS
+   +0x32c MiniportPauseFunctions : _NDIS_SUPPORTED_PAUSE_FUNCTIONS
+   +0x330 MiniportAutoNegotiationFlags : Uint4B
+   +0x338 WorkQueue        : [7] _SINGLE_LIST_ENTRY
+   +0x370 SingleWorkItems  : [6] _SINGLE_LIST_ENTRY
+   +0x3a0 SendFlags        : UChar
+   +0x3a1 MP6SupportPM     : UChar
+   +0x3a2 XState           : UChar
+   +0x3a8 Log              : Ptr64 _NDIS_LOG
+   +0x3b0 AllocatedResources : Ptr64 _CM_RESOURCE_LIST
+   +0x3b8 AllocatedResourcesTranslated : Ptr64 _CM_RESOURCE_LIST
+   +0x3c0 PatternList      : _SINGLE_LIST_ENTRY
+   +0x3c8 WOLPatternList   : _SINGLE_LIST_ENTRY
+   +0x3d0 PMProtocolOffloadList : _SINGLE_LIST_ENTRY
+   +0x3d8 PMCapabilities61 : _NDIS_PNP_CAPABILITIES
+   +0x3e8 PMHardwareCapabilities : _NDIS_PM_CAPABILITIES
+   +0x424 PMAdvertisedCapabilities : _NDIS_PM_CAPABILITIES
+   +0x460 PMCurrentParameters : _NDIS_PM_PARAMETERS
+   +0x474 PMWmiParameters  : _NDIS_PM_PARAMETERS
+   +0x488 OriginalDeviceCaps : _DEVICE_CAPABILITIES
+   +0x4c8 DeviceCaps       : _DEVICE_CAPABILITIES
+   +0x508 S0WakeupSupported : UChar
+   +0x50c WakeUpEnable     : Uint4B
+   +0x510 WaitWakeIrp      : Ptr64 _IRP
+   +0x518 WaitWakeIrpCompleted : _KEVENT
+   +0x530 WaitWakeIoCompletionRoutineRan : Bool
+   +0x531 WaitWakeCancelInProgress : Bool
+   +0x532 WaitWakeCancelAttempted : Bool
+   +0x534 WaitWakeSystemState : _SYSTEM_POWER_STATE
+   +0x538 VcIndex          : _LARGE_INTEGER
+   +0x540 VcCountLock      : Uint8B
+   +0x548 WmiEnabledVcs    : _LIST_ENTRY
+   +0x558 pNdisGuidMap     : Ptr64 _NDIS_GUID
+   +0x560 pCustomGuidMap   : Ptr64 _NDIS_GUID
+   +0x568 VcCount          : Uint2B
+   +0x56a cNdisGuidMap     : Uint2B
+   +0x56c cCustomGuidMap   : Uint2B
+   +0x570 MediaDisconnectTimer : _NDIS_TIMER
+   +0x5f0 PnPDeviceState   : _NDIS_PNP_DEVICE_STATE
+   +0x5f4 OldPnPDeviceState : _NDIS_PNP_DEVICE_STATE
+   +0x5f8 DeferredDpc      : _KDPC
+   +0x638 StartTicks       : _LARGE_INTEGER
+   +0x640 IndicatedPacket  : Ptr64 Ptr64 _NDIS_PACKET
+   +0x648 RemoveReadyEvent : Ptr64 _KEVENT
+   +0x650 AllRequestsCompletedEvent : Ptr64 _KEVENT
+   +0x658 InitTimeMs       : Uint4B
+   +0x660 WorkItemBuffer   : [6] _NDIS_MINIPORT_WORK_ITEM
+   +0x6f0 OidList          : Ptr64 _OID_LIST
+   +0x6f8 InternalResetCount : Uint2B
+   +0x6fa MiniportResetCount : Uint2B
+   +0x6fc MediaSenseConnectCount : Uint2B
+   +0x6fe MediaSenseDisconnectCount : Uint2B
+   +0x700 xPackets         : Ptr64 Ptr64 _NDIS_PACKET
+   +0x708 UserModeOpenReferences : Uint4B
+   +0x710 WSendPacketsHandler : Ptr64     void 
+   +0x718 MiniportAttributes : Uint4B
+   +0x71c NumOpens         : Uint2B
+   +0x71e CFHangXTicks     : Uint2B
+   +0x720 RequestCount     : Uint4B
+   +0x724 IndicatedPacketsCount : Uint4B
+   +0x728 PhysicalMediumType : _NDIS_PHYSICAL_MEDIUM
+   +0x72c MiniportMediaType : _NDIS_MEDIUM
+   +0x730 DataLinkLayerType : _NDIS_MEDIUM
+   +0x734 MpSpecifiedMediaType : _NDIS_MEDIUM
+   +0x738 LastRequest      : Ptr64 _NDIS_REQUEST
+   +0x740 FakeMac          : Ptr64 Void
+   +0x748 LockDbg          : Uint4B
+   +0x74c LockDbgX         : Uint4B
+   +0x750 LockThread       : Ptr64 Void
+   +0x758 InfoFlags        : Uint4B
+   +0x760 TimerQueueLock   : Uint8B
+   +0x768 ResetCompletedEvent : Ptr64 _KEVENT
+   +0x770 SavedPacketIndicateHandler : Ptr64     void 
+   +0x778 RegisteredInterrupts : Int4B
+   +0x77c SetOid           : Uint4B
+   +0x780 CFHCompletedEvent : _KEVENT
+   +0x798 CFHWorkItem      : _WORK_QUEUE_ITEM
+   +0x7b8 CFHWorkItemQueued : Int4B
+   +0x7c0 DeviceContext    : Ptr64 Void
+   +0x7c8 RssParametersBuffer : Ptr64 _NDIS_MINIPORT_RSS_PARAMETERS_CACHE
+   +0x7d0 UsingMSIX        : UChar
+   +0x7d1 Miniport5InNdis6Mode : UChar
+   +0x7d2 Miniport5HasNdis6Component : UChar
+   +0x7d3 InitMode         : UChar
+   +0x7d4 InitModeNotNeededAnymore : UChar
+   +0x7d5 MediaChangeFilters : Char
+   +0x7d6 CheckPacketFilters : UChar
+   +0x7d7 ReceiveFilters   : UChar
+   +0x7d8 RecvLock         : Uint8B
+   +0x7e0 RecvState        : _NDIS_MINIPORT_STATE
+   +0x7e4 OutstandingReceives : Uint4B
+   +0x7e8 MiniportRecvLockThread : Ptr64 Void
+   +0x7f0 RecvLockDbg      : Uint4B
+   +0x7f8 NextSendPacketsHandler : Ptr64     void 
+   +0x800 FinalSendPacketsHandler : Ptr64     void 
+   +0x808 LowestFilter     : Ptr64 _NDIS_FILTER_BLOCK
+   +0x810 HighestFilter    : Ptr64 _NDIS_FILTER_BLOCK
+   +0x818 ShutdownContext  : Ptr64 Void
+   +0x820 ShutdownHandler  : Ptr64     void 
+   +0x828 BugcheckCallbackRecord : _KBUGCHECK_CALLBACK_RECORD
+   +0x868 TopIndicateNetBufferListsHandler : Ptr64     void 
+   +0x870 TopIndicateLoopbackNetBufferListsHandler : Ptr64     void 
+   +0x878 Ndis5PacketIndicateHandler : Ptr64     void 
+   +0x880 MiniportReturnPacketHandler : Ptr64     void 
+   +0x888 MiniportReturnPacketContext : Ptr64 Void
+   +0x890 SynchronousReturnPacketHandler : Ptr64     void 
+   +0x898 SynchronousReturnPacketContext : Ptr64 Void
+   +0x8a0 OidRequestList   : _LIST_ENTRY
+   +0x8b0 PendingOidRequest : Ptr64 _NDIS_OID_REQUEST
+   +0x8b8 ProcessedOidRequest : Ptr64 _NDIS_OID_REQUEST
+   +0x8c0 HookedOidRequest : Ptr64 _NDIS_OID_REQUEST
+   +0x8c8 NextCoOidRequestHandle : Ptr64 Void
+   +0x8d0 Ndis6ProtocolsBound : Uint4B
+   +0x8d4 PmodeOpen6       : Uint4B
+   +0x8d8 State            : _NDIS_MINIPORT_STATE
+   +0x8e0 AsyncOpCompletionEvent : Ptr64 _KEVENT
+   +0x8e8 AsyncOpCompletionStatus : Int4B
+   +0x8f0 MaxXmitLinkSpeed : Uint8B
+   +0x8f8 MaxRcvLinkSpeed  : Uint8B
+   +0x900 SupportedPacketFilters : Uint4B
+   +0x908 NoFilter         : _NDIS_MINIPORT_HANDLERS
+   +0x9c0 Next             : _NDIS_MINIPORT_HANDLERS
+   +0xa78 ReceivePathEnabled : UChar
+   +0xa79 NormalTopReceive : UChar
+   +0xa7c SendPathType     : _NDIS_SEND_PATH_TYPE
+   +0xa80 SavedSendPathType : _NDIS_SEND_PATH_TYPE
+   +0xa84 SavedReceivePathEnabled : UChar
+   +0xa88 TimestampFlags   : Uint4B
+   +0xa8c FilterPnPFlags   : Uint4B
+   +0xa90 SupportedStatistics : Uint4B
+   +0xa94 RecvScaleCapabilities : _NDIS_RECEIVE_SCALE_CAPABILITIES
+   +0xaa8 GeneralAttributes : Ptr64 _NDIS_MINIPORT_ADAPTER_GENERAL_ATTRIBUTES
+   +0xab0 PortList         : _LIST_ENTRY
+   +0xac0 AllocatedPortIndices : Ptr64 UChar
+   +0xac8 AllocatedPortIndicesLength : Uint4B
+   +0xacc NumberOfPorts    : Uint4B
+   +0xad0 NumberOfActivePorts : Uint4B
+   +0xad8 MiniportXmitLinkSpeed : Uint8B
+   +0xae0 MiniportRcvLinkSpeed : Uint8B
+   +0xae8 InitModeTimeoutTimer : _NDIS_TIMER
+   +0xb68 InitModeTimeoutWorkItem : _NDIS_WORK_ITEM
+   +0xbb8 InitModeTimeoutTimerQueuedEvent : _KEVENT
+   +0xbd0 DataBackFillSize : Uint4B
+   +0xbd4 ContextBackFillSize : Uint4B
+   +0xbd8 TopFilterRestartAttributes : _NDIS_RESTART_GENERAL_ATTRIBUTES
+   +0xc30 TopRecvScaleCapabilities : _NDIS_RECEIVE_SCALE_CAPABILITIES
+   +0xc44 NsiOpenReferences : Uint4B
+   +0xc48 ProcessingOpen   : Ptr64 Void
+   +0xc50 NsiRequestsCompletedEvent : Ptr64 _KEVENT
+   +0xc58 QueryPowerDeviceState : _DEVICE_POWER_STATE
+   +0xc5c MinimumNdisMajorVersion : UChar
+   +0xc5d MinimumNdisMinorVersion : UChar
+   +0xc60 BottomIfStats    : Ptr64 _NDIS_MINIPORT_STATS
+   +0xc68 PeriodicReceiveQueue : _NDIS_M_PERIODIC_RECEIVES
+   +0xcf8 PeriodicReceivesNblCountIndex : Ptr64 PNDIS_PER_PROCESSOR_SLOT__
+   +0xd00 DefaultSendControlState : _NDIS_PORT_CONTROL_STATE
+   +0xd04 DefaultRcvControlState : _NDIS_PORT_CONTROL_STATE
+   +0xd08 DefaultSendAuthorizationState : _NDIS_PORT_AUTHORIZATION_STATE
+   +0xd0c DefaultRcvAuthorizationState : _NDIS_PORT_AUTHORIZATION_STATE
+   +0xd10 DefaultPortSendControlState : _NDIS_PORT_CONTROL_STATE
+   +0xd14 DefaultPortRcvControlState : _NDIS_PORT_CONTROL_STATE
+   +0xd18 DefaultPortSendAuthorizationState : _NDIS_PORT_AUTHORIZATION_STATE
+   +0xd1c DefaultPortRcvAuthorizationState : _NDIS_PORT_AUTHORIZATION_STATE
+   +0xd20 PciDeviceCustomProperties : _NDIS_PCI_DEVICE_CUSTOM_PROPERTIES
+   +0xd58 TopNdis5PacketIndicateHandler : Ptr64     void 
+   +0xd60 ndisSupportedOidList : Ptr64 Uint4B
+   +0xd68 ndisSupportedOidListLength : Uint4B
+   +0xd6c MsiIntCount      : Uint4B
+   +0xd70 MiniportDpcWorkItem : _WORK_QUEUE_ITEM
+   +0xd90 InvalidFrames    : Uint8B
+   +0xd98 PagingPathCount  : Int4B
+   +0xda0 ReceiveQueueList : _LIST_ENTRY
+   +0xdb0 AllocatedQueueIndices : Ptr64 UChar
+   +0xdb8 AllocatedQueueIndicesLength : Uint4B
+   +0xdbc NumReceiveQueues : Uint4B
+   +0xdc0 ReceiveFilterList : _LIST_ENTRY
+   +0xdd0 AllocatedReceiveFilterIndices : Ptr64 UChar
+   +0xdd8 AllocatedReceiveFilterIndicesLength : Uint4B
+   +0xddc NumReceiveFilters : Uint4B
+   +0xde0 EnabledReceiveFilterTypes : Uint4B
+   +0xde4 EnabledReceiveQueueTypes : Uint4B
+   +0xde8 ReceiveFilterHwCapabilities : Ptr64 _NDIS_RECEIVE_FILTER_CAPABILITIES
+   +0xdf0 ReceiveFilterCurrentCapabilities : Ptr64 _NDIS_RECEIVE_FILTER_CAPABILITIES
+   +0xdf8 TopReceiveFilterCurrentCapabilities : Ptr64 _NDIS_RECEIVE_FILTER_CAPABILITIES
+   +0xe00 NicSwitchHwCapabilities : Ptr64 _NDIS_NIC_SWITCH_CAPABILITIES
+   +0xe08 NicSwitchCurrentCapabilities : Ptr64 _NDIS_NIC_SWITCH_CAPABILITIES
+   +0xe10 TopNicSwitchCurrentCapabilities : Ptr64 _NDIS_NIC_SWITCH_CAPABILITIES
+   +0xe18 SharedMemoryBlockList : _LIST_ENTRY
+   +0xe28 AllocateSharedMemoryHandler : Ptr64     int 
+   +0xe30 FreeSharedMemoryHandler : Ptr64     void 
+   +0xe38 AllocateSharedMemoryContext : Ptr64 Void
+   +0xe40 MsiCaps          : PCI_MSI_CAPABILITY
+   +0xe58 MsiXCaps         : PCI_MSIX_CAPABILITY
+   +0xe68 NumberOfIndirectionTableChanges : Uint8B
+   +0xe70 PciDeviceSriovSupport : Uint4B
+   +0xe74 BeginSavedFields : UChar
+   +0xe74 NumUserOpens     : Uint4B
+   +0xe78 OffloadRegistry  : _NDIS_MINIPORT_OFFLOAD_REG
+   +0xe7c MediaDisconnectTimeOut : Uint2B
+   +0xe7e SGMapRegistersNeeded : Uint2B
+   +0xe80 DriverVerifyFlags : Uint4B
+   +0xe88 SetBusData       : Ptr64     unsigned long 
+   +0xe90 GetBusData       : Ptr64     unsigned long 
+   +0xe98 BusDataContext   : Ptr64 Void
+   +0xea0 BusType          : _INTERFACE_TYPE
+   +0xea4 BusNumber        : Uint4B
+   +0xea8 SlotNumber       : Uint4B
+   +0xeb0 OpenReadyEvent   : _NDIS_EVENT
+   +0xec8 NumAdminOpens    : Uint4B
+   +0xed0 DriverHandle     : Ptr64 _NDIS_M_DRIVER_BLOCK
+   +0xed8 BindPaths        : Ptr64 _NDIS_BIND_PATHS
+   +0xee0 MiniportPhysicalMediumType : _NDIS_PHYSICAL_MEDIUM
+   +0xee8 SecurityDescriptor : Ptr64 Void
+   +0xef0 BaseName         : _UNICODE_STRING
+   +0xf00 MiniportName     : _UNICODE_STRING
+   +0xf10 DeviceObject     : Ptr64 _DEVICE_OBJECT
+   +0xf18 PhysicalDeviceObject : Ptr64 _DEVICE_OBJECT
+   +0xf20 NextDeviceObject : Ptr64 _DEVICE_OBJECT
+   +0xf28 NextGlobalMiniport : Ptr64 _NDIS_MINIPORT_BLOCK
+   +0xf30 pAdapterInstanceName : Ptr64 _UNICODE_STRING
+   +0xf38 PnPCapabilities  : Uint4B
+   +0xf3c CurrentDevicePowerState : _DEVICE_POWER_STATE
+   +0xf40 PowerStateLock   : Uint8B
+   +0xf48 DriverPowerState : _DEVICE_POWER_STATE
+   +0xf4c PrevDriverPowerState : _DEVICE_POWER_STATE
+   +0xf50 LowPowerRcvReturnNbls : Ptr64 _NET_BUFFER_LIST
+   +0xf58 PendingReturnNBLCount : Uint4B
+   +0xf5c SurpriseRemoveFlushedRcvReturnQueue : UChar
+   +0xf60 LowPowerRcvReturnNblTracker : Ptr64 NDIS_NBL_TRACKER_HANDLE__
+   +0xf68 PMAdminConfig    : _NDIS_PM_ADMIN_CONFIG
+   +0xf70 PMPatternSemaphore : _KSEMAPHORE
+   +0xf90 PMOffloadSemaphore : _KSEMAPHORE
+   +0xfb0 BusInterface     : Ptr64 Void
+   +0xfb8 InstanceNumber   : Uint2B
+   +0xfc0 ConfigurationHandle : Ptr64 Void
+   +0xfc8 InterfaceGuid    : _GUID
+   +0xfd8 NetLuid          : _NET_LUID_LH
+   +0xfe0 IfBlockAvailable : UChar
+   +0xfe8 IfBlock          : Ptr64 _NDIS_IF_BLOCK
+   +0xff0 IfBlockPointerRefZeroEvent : Ptr64 _KEVENT
+   +0xff8 IfIndex          : Uint4B
+   +0xffc AdminStatus      : _NET_IF_ADMIN_STATUS
+   +0x1000 OperStatus       : _NET_IF_OPER_STATUS
+   +0x1004 OperStatusFlags  : Uint4B
+   +0x1008 SendHandler      : Ptr64     int 
+   +0x1008 WanSendHandler   : Ptr64     int 
+   +0x1010 NblTracker       : Ptr64 NDIS_NBL_TRACKER_HANDLE__
+   +0x1018 ReenumerateSelfInterface : Ptr64 _DEVICE_RESET_INTERFACE_STANDARD
+   +0x1020 Offload          : Ptr64 _NDIS_MINIPORT_OFFLOAD
+   +0x1028 NDKBlock         : Ptr64 Void
+   +0x1030 AddDeviceContext : Ptr64 Void
+   +0x1038 RemoveLock       : _IO_REMOVE_LOCK
+   +0x1058 DevinterfaceNetSymbolicLinkName : _UNICODE_STRING
+   +0x1068 PhysicalMediumInInf : Uint4B
+   +0x1070 ExportName       : wistd::unique_ptr<Rtl::KString,wistd::default_delete<Rtl::KString> >
+   +0x1078 FilterClass      : wistd::unique_ptr<Rtl::KString,wistd::default_delete<Rtl::KString> >
+   +0x1080 StatusProcessingThread : Ptr64 Void
+   +0x1088 StatusProcessingDbgX : Uint4B
+   +0x1090 FdoName          : _UNICODE_STRING
+   +0x10a0 PowerD0CompleteEvent : _KEVENT
+   +0x10b8 LastD0CompleteStatus : Int4B
+   +0x10bc LastD0Reason     : _NDIS_MINIPORT_EVENT
+   +0x10c0 DirectOidRequestCount : Uint4B
+   +0x10c8 AllDirectRequestsCompletedEvent : Ptr64 _KEVENT
+   +0x10d0 HDSplitCurrentConfig : Ptr64 _NDIS_HD_SPLIT_CURRENT_CONFIG
+   +0x10d8 MSIXConfigContext : Ptr64 Void
+   +0x10e0 SetMSIXTableEntry : Ptr64     long 
+   +0x10e8 MaskMSIXTableEntry : Ptr64     long 
+   +0x10f0 UnmaskMSIXTableEntry : Ptr64     long 
+   +0x10f8 DevicePowerStateWorkItem : _WORK_QUEUE_ITEM
+   +0x1118 SystemPowerStateWorkItem : _WORK_QUEUE_ITEM
+   +0x1138 DefaultReceiveQueue : Ptr64 _NDIS_RECEIVE_QUEUE_BLOCK
+   +0x1140 MaxNumRssProcessors : Uint4B
+   +0x1144 RssBaseProcessor : _PROCESSOR_NUMBER
+   +0x1148 RssMaxProcessor  : _PROCESSOR_NUMBER
+   +0x114c RssProfile       : _NDIS_RSS_PROFILE
+   +0x1150 NumaNodeId       : Uint2B
+   +0x1158 NumaDistances    : Ptr64 Uint2B
+   +0x1160 pModifiedInstanceName : Ptr64 _UNICODE_STRING
+   +0x1168 SyncFlags        : Uint4B
+   +0x116c WSyncFlags       : Uint4B
+   +0x1170 InterlockedFlags : Uint4B
+   +0x1178 Ref              : _ULONG_REFERENCE
+   +0x1188 SelectiveSuspend : Ptr64 _NDIS_SELECTIVE_SUSPEND
+   +0x1190 AoAc             : Ptr64 _NDIS_MINIPORT_AOAC
+   +0x1198 LastWakeReason   : _NDIS_PM_WAKE_REASON_TYPE
+   +0x11a0 PnpEventLog      : Ptr64 NDIS_EVENT_LOG_HANDLE__
+   +0x11a8 D0CompleteSignalWorkItem : _NDIS_D0_SIGNAL_WORK_ITEM
+   +0x1200 PhysicalPerformanceCounters : Ptr64 _NDIS_PHYSICAL_PERFORMANCE_COUNTERS
+   +0x1208 TimeOfInitialization : _LARGE_INTEGER
+   +0x1210 LastSystemSleepTime : _LARGE_INTEGER
+   +0x1218 TotalSystemSleepTimeMs : Uint8B
+   +0x1220 SriovHwCapabilities : Ptr64 _NDIS_SRIOV_CAPABILITIES
+   +0x1228 SriovCurrentCapabilities : Ptr64 _NDIS_SRIOV_CAPABILITIES
+   +0x1230 InvalidateBlockMask : Uint8B
+   +0x1238 InvalidateBlockIoctlPf : Ptr64 _IRP
+   +0x1240 InvalidateBlockIoctlVf : Ptr64 _IRP
+   +0x1248 InvalidateBlockVfParams : _VPCI_INVALIDATE_BLOCK_OUTPUT
+   +0x1250 InvalidateBlockEvent : _KEVENT
+   +0x1268 InvalidateVfId   : Uint2B
+   +0x126a InvalidateBlockCancelling : UChar
+   +0x1270 PFBlock          : Ptr64 _NDIS_PF_BLOCK
+   +0x1278 NumSwitches      : Uint4B
+   +0x1280 NicSwitchList    : _LIST_ENTRY
+   +0x1290 NumAllocatedVFs  : Uint4B
+   +0x1298 VFList           : _LIST_ENTRY
+   +0x12a8 NumActiveVPorts  : Uint4B
+   +0x12b0 VPortList        : _LIST_ENTRY
+   +0x12c0 AllocatedVPortIndices : Ptr64 UChar
+   +0x12c8 AllocatedVPortIndicesLength : Uint4B
+   +0x12d0 SetVirtualFunctionData : Ptr64     unsigned long 
+   +0x12d8 GetVirtualFunctionData : Ptr64     unsigned long 
+   +0x12e0 EnableVirtualization : Ptr64     long 
+   +0x12e8 GetVirtualDeviceLocation : Ptr64     long 
+   +0x12f0 GetVirtualFunctionProbedBars : Ptr64     long 
+   +0x12f8 VirtInterfaceContext : Ptr64 Void
+   +0x1300 DevinterfaceVirtSymbolicLinkName : _UNICODE_STRING
+   +0x1310 VpciInterfaceDereference : Ptr64     void 
+   +0x1318 WriteVfConfigBlock : Ptr64     long 
+   +0x1320 ReadVfConfigBlock : Ptr64     long 
+   +0x1328 VpciInterfaceContext : Ptr64 Void
+   +0x1330 VfSerialNumber   : Uint4B
+   +0x1334 SriovLuid        : _LUID
+   +0x1340 RefCountTracker  : Ptr64 NDIS_REFCOUNT_HANDLE__
+   +0x1348 NsiRefCountTracker : Ptr64 NDIS_REFCOUNT_HANDLE__
+   +0x1350 QosHwCapabilities : Ptr64 _NDIS_QOS_CAPABILITIES
+   +0x1358 QosCurrentCapabilities : Ptr64 _NDIS_QOS_CAPABILITIES
+   +0x1360 QosOperationalParameters : Ptr64 _NDIS_QOS_PARAMETERS
+   +0x1368 QosOperationalParametersBufferSize : Uint4B
+   +0x1370 QosRemoteParameters : Ptr64 _NDIS_QOS_PARAMETERS
+   +0x1378 QosRemoteParametersBufferSize : Uint4B
+   +0x1380 DeviceFlags      : Uint8B
+   +0x1388 VerifierContext  : Ptr64 Void
+   +0x1390 SurpriseRemovalWorkItem : _WORK_QUEUE_ITEM
+   +0x13b0 Bindings         : Ndis::BindStack
+   +0x1418 BindEngine       : Ndis::BindEngine
+   +0x1490 MiniportOwner    : Rtl::KNeutralLock<enum NDIS_MINIPORT_POLICY_OWNER>
+   +0x14b8 PmInterruptedByPnp : Bool
+   +0x14b9 DoNotBlockOnMiniportLock : Bool
+   +0x14ba PoFxDStateReportingEnabled : Bool
+   +0x14c0 HookAdapterHandle : Ptr64 NDIS_MINIPORT_HOOK_ADAPTER_HANDLE__
+   +0x14c8 InterfaceUpdateWorkItem : _WORK_QUEUE_ITEM
+   +0x14e8 InterfaceUpdateInProgress : Bool
+   +0x14e9 MacAddressUpdateQueued : Bool
+   +0x14ea MtuUpdateQueued  : Bool
+   +0x14ec PendingMacAddress : _IF_PHYSICAL_ADDRESS_LH
+   +0x1510 PendingMtuSize   : Uint4B
+   +0x1518 PnPInstanceId    : Ptr64 Wchar
+   +0x1520 BlackBoxHandle   : Ptr64 RECORDER_LOG__
+   +0x1528 PowerCompleteEvent : Ptr64 _KEVENT
+   +0x1530 PowerCompleteStatus : Int4B
+   +0x1538 DevicePowerOnWorkItem : WORKITEM_WITH_IRP
+   +0x1560 DevicePowerDownWorkItem : WORKITEM_WITH_IRP
+   +0x1588 PendingOidWatchdog : wil::unique_any_t<wil::details::unique_storage<wil::details::resource_policy<NDISWATCHDOG__ *,void (__cdecl*)(NDISWATCHDOG__ *),&ndisFreeWatchdog,wistd::integral_constant<unsigned __int64,1>,NDISWATCHDOG__ *,-1,std::nullptr_t> > >
+   +0x1590 HookedOidWatchdog : wil::unique_any_t<wil::details::unique_storage<wil::details::resource_policy<NDISWATCHDOG__ *,void (__cdecl*)(NDISWATCHDOG__ *),&ndisFreeWatchdog,wistd::integral_constant<unsigned __int64,1>,NDISWATCHDOG__ *,-1,std::nullptr_t> > >
+   +0x1598 ReenumerateWatchdog : wil::unique_any_t<wil::details::unique_storage<wil::details::resource_policy<NDISWATCHDOG__ *,void (__cdecl*)(NDISWATCHDOG__ *),&ndisFreeWatchdog,wistd::integral_constant<unsigned __int64,1>,NDISWATCHDOG__ *,-1,std::nullptr_t> > >
+   +0x15a0 PDBlock          : Ptr64 _NDIS_PD_BLOCK
+   +0x15a8 PdcHandle        : Ptr64 Void
+   +0x15b0 PdcTaskClientDisableTimer : _NDIS_TIMER
+   +0x1630 PdcTaskClientDisableWorkItem : _NDIS_WORK_ITEM
+   +0x1680 PdcTaskClientMode : Int4B
+   +0x1684 ModernStandbyWoLMagicPacketEnable : Uint4B
+   +0x1688 RssV2Context     : Ptr64 _NDIS_RSS_DPC_WORKER_CONTEXT
+   +0x1690 RssV2CompletionCount : Int4B
+   +0x1698 RssV2CompletionEvent : _KEVENT
+   +0x16b0 RssV2Initialized : UChar
+   +0x16b8 SynchronousOidCalls : _LIST_ENTRY
+   +0x16c8 HwTimestampCapabilities : Ptr64 _NDIS_TIMESTAMP_CAPABILITIES
+   +0x16d0 HwTimestampCurrentConfig : Ptr64 _NDIS_TIMESTAMP_CAPABILITIES
+   +0x16d8 TopTimestampConfig : Ptr64 _NDIS_TIMESTAMP_CAPABILITIES
+   +0x16e0 TopHwTimestampCapabilities : Ptr64 _NDIS_TIMESTAMP_CAPABILITIES
+   +0x16e8 PktMonComp       : _PKTMON_COMPONENT_CONTEXT
+   +0x16f8 PktMonEdge       : _PKTMON_EDGE_CONTEXT
+   
+0:000> dt ndis!_NDIS_FILTER_BLOCK
+   +0x000 Header           : _NDIS_OBJECT_HEADER
+   +0x008 NextFilter       : Ptr64 _NDIS_FILTER_BLOCK
+   +0x010 FilterDriver     : Ptr64 _NDIS_FILTER_DRIVER_BLOCK
+   +0x018 FilterModuleContext : Ptr64 Void
+   +0x020 Miniport         : Ptr64 _NDIS_MINIPORT_BLOCK
+   +0x028 FilterInstanceName : wistd::unique_ptr<Rtl::KString,wistd::default_delete<Rtl::KString> >
+   +0x030 FilterFriendlyName : Ptr64 _UNICODE_STRING
+   +0x038 Flags            : Uint4B
+   +0x03c StackFlags       : Uint4B
+   +0x040 State            : _NDIS_FILTER_STATE
+   +0x048 Ref              : _REFERENCE_EX
+   +0x060 FakeStatus       : Int4B
+   +0x068 NextGlobalFilter : Ptr64 _NDIS_FILTER_BLOCK
+   +0x070 LowerFilter      : Ptr64 _NDIS_FILTER_BLOCK
+   +0x078 HigherFilter     : Ptr64 _NDIS_FILTER_BLOCK
+   +0x080 AsyncOpContext   : Ptr64 _FILTER_PAUSE_RESTART_CONTEXT
+   +0x088 NumOfPauseRestartRequests : Int4B
+   +0x090 Lock             : Uint8B
+   +0x098 LockThread       : Ptr64 Void
+   +0x0a0 LockDbg          : Uint4B
+   +0x0a8 OidRequestList   : _LIST_ENTRY
+   +0x0b8 PendingOidRequest : Ptr64 _NDIS_OID_REQUEST
+   +0x0c0 PendingOidWatchdog : wil::unique_any_t<wil::details::unique_storage<wil::details::resource_policy<NDISWATCHDOG__ *,void (__cdecl*)(NDISWATCHDOG__ *),&ndisFreeWatchdog,wistd::integral_constant<unsigned __int64,1>,NDISWATCHDOG__ *,-1,std::nullptr_t> > >
+   +0x0c8 StackExpansionFallback : _NDIS_FILTER_BLOCK::<unnamed-type-StackExpansionFallback>
+   +0x128 StatusIndicationsQueued : UChar
+   +0x12c DroppedReceiveNbls : Int4B
+   +0x130 DroppedSendNbls  : Int4B
+   +0x134 DroppedStatusIndications : Uint4B
+   +0x138 DroppedUncloneableStatusIndications : Uint4B
+   +0x140 PnPRef           : _REFERENCE_EX
+   +0x158 MediaType        : _NDIS_MEDIUM
+   +0x15c PhysicalMediaType : _NDIS_PHYSICAL_MEDIUM
+   +0x160 MediaConnectState : _NET_IF_MEDIA_CONNECT_STATE
+   +0x164 MediaDuplexState : _NET_IF_MEDIA_DUPLEX_STATE
+   +0x168 XmitLinkSpeed    : Uint8B
+   +0x170 RcvLinkSpeed     : Uint8B
+   +0x178 PauseFunctions   : _NDIS_SUPPORTED_PAUSE_FUNCTIONS
+   +0x17c AutoNegotiationFlags : Uint4B
+   +0x180 XState           : UChar
+   +0x181 Reserved1        : UChar
+   +0x182 Reserved2        : UChar
+   +0x183 Reserved3        : UChar
+   +0x184 MediaConnectStateIndicateUp : _NET_IF_MEDIA_CONNECT_STATE
+   +0x188 MediaDuplexStateIndicateUp : _NET_IF_MEDIA_DUPLEX_STATE
+   +0x190 XmitLinkSpeedIndicateUp : Uint8B
+   +0x198 RcvLinkSpeedIndicateUp : Uint8B
+   +0x1a0 PauseFunctionsIndicateUp : _NDIS_SUPPORTED_PAUSE_FUNCTIONS
+   +0x1a4 AutoNegotiationFlagsIndicateUp : Uint4B
+   +0x1a8 NextRequestHandle : Ptr64 Void
+   +0x1b0 IterativeDataPathTracker : Ptr64 [4] _NDIS_ITERATIVE_DATA_PATH_TRACKER_ENTRY
+   +0x1b8 NextSendNetBufferListsHandler : Ptr64     void 
+   +0x1c0 NextSendNetBufferListsContext : Ptr64 Void
+   +0x1c8 NextSendNetBufferListsTracker : Ptr64 NDIS_NBL_TRACKER_HANDLE__
+   +0x1d0 NextSendNetBufferListsObject : Ptr64 _NDIS_OBJECT_HEADER
+   +0x1d8 NextSendNetBufferListsCompleteHandler : Ptr64     void 
+   +0x1e0 NextSendNetBufferListsCompleteContext : Ptr64 Void
+   +0x1e8 NextSendNetBufferListsCompleteTracker : Ptr64 NDIS_NBL_TRACKER_HANDLE__
+   +0x1f0 NextSendNetBufferListsCompleteObject : Ptr64 _NDIS_OBJECT_HEADER
+   +0x1f8 NextIndicateReceiveNetBufferListsHandler : Ptr64     void 
+   +0x200 NextIndicateReceiveNetBufferListsContext : Ptr64 Void
+   +0x208 NextIndicateReceiveNetBufferListsTracker : Ptr64 NDIS_NBL_TRACKER_HANDLE__
+   +0x210 NextIndicateReceiveNetBufferListsObject : Ptr64 _NDIS_OBJECT_HEADER
+   +0x218 NextReturnNetBufferListsHandler : Ptr64     void 
+   +0x220 NextReturnNetBufferListsContext : Ptr64 Void
+   +0x228 NextReturnNetBufferListsTracker : Ptr64 NDIS_NBL_TRACKER_HANDLE__
+   +0x230 NextReturnNetBufferListsObject : Ptr64 _NDIS_OBJECT_HEADER
+   +0x238 NextCancelSendNetBufferListsHandler : Ptr64     void 
+   +0x240 NextCancelSendNetBufferListsContext : Ptr64 Void
+   +0x248 Characteristics  : _NDIS_FILTER_PARTIAL_CHARACTERISTICS
+   +0x278 FilterSendNetBufferListsHandler : Ptr64     void 
+   +0x280 FilterIndicateReceiveNetBufferListsHandler : Ptr64     void 
+   +0x288 FilterCancelSendNetBufferListsHandler : Ptr64     void 
+   +0x290 TcpOffloadReceiveReturnHandler : Ptr64     int 
+   +0x298 NblTracker       : Ptr64 NDIS_NBL_TRACKER_HANDLE__
+   +0x2a0 Offload          : Ptr64 _NDIS_FILTER_TASK_OFFLOAD
+   +0x2a8 InterfaceGuid    : _GUID
+   +0x2b8 IfIndex          : Uint4B
+   +0x2c0 IfBlock          : Ptr64 _NDIS_IF_BLOCK
+   +0x2c8 NextDirectRequestHandle : Ptr64 Void
+   +0x2d0 DirectOidRequestCount : Uint4B
+   +0x2d8 WOLPatternList   : _SINGLE_LIST_ENTRY
+   +0x2e0 PMProtocolOffloadList : _SINGLE_LIST_ENTRY
+   +0x2e8 PMCurrentParameters : _NDIS_PM_PARAMETERS
+   +0x300 Bind             : Ptr64 NDIS_BIND_FILTER_LINK
+   +0x308 HwTimestampCapabilities : Ptr64 _NDIS_TIMESTAMP_CAPABILITIES
+   +0x310 HwTimestampCurrentConfig : Ptr64 _NDIS_TIMESTAMP_CAPABILITIES
+   +0x318 VerifierContext  : Ptr64 Void
+   +0x320 PktMonComp       : _PKTMON_COMPONENT_CONTEXT
+   +0x330 PktMonEdgeLower  : _PKTMON_EDGE_CONTEXT
+   +0x348 PktMonEdgeUpper  : _PKTMON_EDGE_CONTEXT
