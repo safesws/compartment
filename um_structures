@@ -1,0 +1,13 @@
+typedef struct _COMPARTMENT_ENRTY
+{
+    GUID    Guid;              
+    DWORD   CompartmentId;
+    WORD    DescriptionSize;
+    WCHAR   Description[257];
+    DWORD   Flags;
+    // Structure size: 0x21C (540 bytes)
+} COMPARTMENT_ENRTY, * PCOMPARTMENT_ENRTY;
+
+typedef DWORD(WINAPI* PFN_CreateCompartment)(PCOMPARTMENT_ENRTY pEntry);
+typedef DWORD(WINAPI* PFN_DeleteCompartment)(DWORD CompartmentId, DWORD Reserved);
+typedef NTSTATUS(WINAPI* PFN_SetNetworkInformation)(const NET_IF_NETWORK_GUID* NetworkGuid, NET_IF_COMPARTMENT_ID CompartmentId, const WCHAR* NetworkName);
