@@ -2,7 +2,7 @@ Here is an attempt to understand Internals of the __Windows Containers Neworking
 
 [um_structures](https://github.com/safesws/compartment/blob/main/um_structures) - user mode structures and functions for the __compartments__
 <br>
-[ndis_structures](https://github.com/safesws/compartment/blob/main/ndis_structures) - kernel mode structures and functions for the parts involed to the __compartments__ implementation
+[ndis_structures](https://github.com/safesws/compartment/blob/main/ndis_structures) - kernel mode structures and functions for the parts involved into the __compartments__ implementation
 <br>
 [compartment.cpp](https://github.com/safesws/compartment/blob/main/compartment.cpp) - user mode application for the __compartments__ manipulations
 <br>
