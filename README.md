@@ -10,4 +10,5 @@ Here is an attempt to understand Internals of the __Windows Containers Neworking
 <br>
 [sws_ndis.h](https://github.com/safesws/compartment/blob/main/sws_ndis.h) - kernel mode code for _playing_ with __compartments__ internals (like set _network isolation_ for an interface)
 <br>
+<br>
 All information described in the details here: [https://safesws.github.io/windows-containers-network-isolation/](https://safesws.github.io/windows-containers-network-isolation/)
